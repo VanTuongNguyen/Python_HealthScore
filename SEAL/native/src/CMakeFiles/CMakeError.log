@@ -1,0 +1,45 @@
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/kabe/Downloads/Thesis/SEAL-Python-master/SEAL/native/src/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_16540/fast && /usr/bin/make -f CMakeFiles/cmTC_16540.dir/build.make CMakeFiles/cmTC_16540.dir/build
+make[1]: Entering directory '/home/kabe/Downloads/Thesis/SEAL-Python-master/SEAL/native/src/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_16540.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -fPIE   -o CMakeFiles/cmTC_16540.dir/src.c.o   -c /home/kabe/Downloads/Thesis/SEAL-Python-master/SEAL/native/src/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_16540
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_16540.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD    CMakeFiles/cmTC_16540.dir/src.c.o  -o cmTC_16540 
+CMakeFiles/cmTC_16540.dir/src.c.o: In function `main':
+src.c:(.text+0x3e): undefined reference to `pthread_create'
+src.c:(.text+0x4a): undefined reference to `pthread_detach'
+src.c:(.text+0x56): undefined reference to `pthread_cancel'
+src.c:(.text+0x67): undefined reference to `pthread_join'
+src.c:(.text+0x7b): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_16540.dir/build.make:103: recipe for target 'cmTC_16540' failed
+make[1]: *** [cmTC_16540] Error 1
+make[1]: Leaving directory '/home/kabe/Downloads/Thesis/SEAL-Python-master/SEAL/native/src/CMakeFiles/CMakeTmp'
+Makefile:138: recipe for target 'cmTC_16540/fast' failed
+make: *** [cmTC_16540/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
