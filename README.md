@@ -1,4 +1,4 @@
-## Microsoft SEAL For Python
+## Microsoft SEAL For Python and Health Score Predicting Model
 
 Microsoft [**SEAL**](https://github.com/microsoft/SEAL) is an easy-to-use open-source ([MIT licensed](https://github.com/microsoft/SEAL/blob/master/LICENSE)) homomorphic encryption library developed by the Cryptography Research group at Microsoft.
 
@@ -121,3 +121,9 @@ Email: [huelse@oini.top](mailto:huelse@oini.top?subject=Github-SEAL-Python-Issue
 
 * [Contributors](https://github.com/Huelse/SEAL-Python/graphs/contributors)
 
+## Health Score Predicting Model
+## Run
+
+`cd tests`
+
+`python3 thesis.py`
