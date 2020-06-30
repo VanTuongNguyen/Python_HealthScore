@@ -121,9 +121,4 @@ Email: [huelse@oini.top](mailto:huelse@oini.top?subject=Github-SEAL-Python-Issue
 
 * [Contributors](https://github.com/Huelse/SEAL-Python/graphs/contributors)
 
-## Health Score Predicting Model
-## Run
 
-`cd tests`
-
-`python3 thesis.py`
