@@ -3,7 +3,7 @@ from seal import *
 from seal_helper import *
 import datetime as dt
 import sys
-
+import pickle
 
 
 print_example_banner("Health Score model using CKKS")
@@ -25,6 +25,7 @@ print_parameters(context)
 
 keygen = KeyGenerator(context)
 public_key = keygen.public_key()
+
 secret_key = keygen.secret_key()
 relin_keys = keygen.relin_keys()
 
@@ -48,8 +49,9 @@ def child_app(inputs):
     ptxt_vec = Plaintext()
     vrep = DoubleVector()
     for i in range(encoder.slot_count()):
+        
         vrep.append(inputs[i % len(inputs)])
-
+    
     # for i in range (dimension):
     #     vrep.append(inputs[i])
     
@@ -176,7 +178,7 @@ def server(ct):
     enc_result.scale(pow(2.0, my_scale))
 
     encoder.encode(W2, enc_result.parms_id(), scale , W2_plaintext)
-
+    # print(math.log(enc_result.scale(),2))
     evaluator.multiply_plain_inplace(enc_result, W2_plaintext)
 
     evaluator.rescale_to_next_inplace(enc_result)
@@ -258,9 +260,7 @@ def test(inputs, result):
     # print("\n Result of Prediction on HE: %.4f" % result)
     # print("Result Prediction on non-HE : %.4f" %  sum)
     # print("Diff between HE and non-HE: %.4f" %  abs(result - sum))
-    # print(sum , result)
     
-
     return sum, t
 
 #==================== MAIN ===============================
@@ -276,6 +276,7 @@ if __name__ == '__main__':
     # enc_result, t_predic = server(ct)
     # result, t_decrypt, t_decode = parents_app(enc_result)
     # result_nonHE_temp, time_nonHE_temp = test(X_test[i], result[0])
+
 
 # =================== Evaluation =================
 
@@ -339,6 +340,6 @@ if __name__ == '__main__':
     print("Mean of Difference of predicting time:", y.mean())
     print("Mean of predicting time on non-HE:", time_nonHE.mean())
     # ===================================
-    print("Size of public key", sys.getsizeof(public_key))
-    print("Size of secret key", sys.getsizeof(secret_key))
-    print("Size of evalation key", sys.getsizeof(relin_keys))
+    # print("Size of public key", sys.getsizeof(public_key))
+    # print("Size of secret key", sys.getsizeof(secret_key))
+    # print("Size of evalation key", sys.getsizeof(relin_keys))
